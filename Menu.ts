@@ -1,13 +1,36 @@
 import leia = require("readline-sync");
 import { colors } from "./src/util/colors";
+import { Conta } from "./src/model/conta";
 
 export function main() {
   let opcao: number;
 
+  //Intanciar Objetos da Classe Conta
+
+  const c1 = new Conta(1, 1234, "Sofia", 1, 100000.00);
+
+  c1.visualizar();
+
+  //Testes do Método Sacar
+  console.log("Sacar 100,00:", c1.sacar(100.00));
+  console.log("Sacar 200000,00:", c1.sacar(200000.00));
+  console.log("Sacar 0,00:", c1.sacar(0.00));
+
+
+  //Testes do Método Depositar
+  console.log("Depositar -10,00: ");
+  c1.depositar(-10.00);
+
+  console.log("Depositar 500,00: ");
+  c1.depositar(500.00);
+
+  c1.visualizar();
+
+
   while (true) {
 
-    console.log(`
-    ${colors.bg.black}${colors.fg.red}
+    console.log(
+     colors.bg.red + colors.fg.black + `
     ╔═══════════════════════════════════════╗
     ║        BANCO DO BRAZIL COM Z          ║
     ║      Seu futuro começa aqui           ║
@@ -18,8 +41,8 @@ export function main() {
     ║ 4 - Atualizar Dados    9 - Sair       ║
     ║ 5 - Apagar Conta                      ║
     ╚═══════════════════════════════════════╝
-    ${colors.reset}
-    `);
+    `+colors.reset 
+    );
 
     opcao = leia.questionInt("Entre com a opção desejada: ");
 
