@@ -1,7 +1,5 @@
 # Projeto Conta Bancária - TypeScript & POO
 
-## Simulador Educacional de Sistema Bancário | Portfólio Profissional
-
 <br />
 
 <div align="center">
@@ -10,12 +8,12 @@
 <br />
 
 <div align="center">
-  <img src="https://img.shields.io/github/languages/top/imayagmb/conta_bancaria_ts_2026?style=flat-square" />
-  <img src="https://img.shields.io/github/repo-size/imayagmb/conta_bancaria_ts_2026?style=flat-square" />
-  <img src="https://img.shields.io/github/languages/count/imayagmb/conta_bancaria_ts_2026?style=flat-square" />
-  <img src="https://img.shields.io/github/last-commit/imayagmb/conta_bancaria_ts_2026?style=flat-square" />
-  <img src="https://img.shields.io/github/issues/imayagmb/conta_bancaria_ts_2026?style=flat-square" />
-  <img src="https://img.shields.io/github/issues-pr/imayagmb/conta_bancaria_ts_2026?style=flat-square" />
+  <img src="https://img.shields.io/github/languages/top/imayagmb/contaBancaria?style=flat-square" />
+  <img src="https://img.shields.io/github/repo-size/imayagmb/contaBancaria?style=flat-square" />
+  <img src="https://img.shields.io/github/languages/count/imayagmb/contaBancaria?style=flat-square" />
+  <img src="https://img.shields.io/github/last-commit/imayagmb/contaBancaria?style=flat-square" />
+  <img src="https://img.shields.io/github/issues/imayagmb/contaBancaria?style=flat-square" />
+  <img src="https://img.shields.io/github/issues-pr/imayagmb/contaBancaria?style=flat-square" />
   <img src="https://img.shields.io/badge/status-andamento-yellow" alt="Status: Andamento">
 </div>
 
@@ -25,7 +23,7 @@
 <br />
 
 
-O **Projeto Conta Bancária** é um projeto **educacional** desenvolvido em **TypeScript**, com foco em **Programação Orientada a Objetos (POO)** e **arquitetura modular**, simulando operações bancárias reais como **CRUD de contas, transferências, depósitos e saques**.
+O **Projeto Conta Bancária** é um projeto desenvolvido em **TypeScript**, com foco em **Programação Orientada a Objetos (POO)** e **arquitetura modular**, simulando operações bancárias reais como **CRUD de contas, transferências, depósitos e saques**.
 
 **Objetivo:** Demonstrar **organização, domínio técnico, modelagem de domínio e boas práticas de engenharia de software** em um case prático de portfólio.
 
@@ -149,7 +147,7 @@ Estrutura organizada para facilitar **manutenção, escalabilidade e leitura té
 
 
 
-- **Linguagem & Runtime**
+- **Linguagem e tempo de execução**
 
   - TypeScript
 
