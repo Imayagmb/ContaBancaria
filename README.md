@@ -16,7 +16,7 @@
   <img src="https://img.shields.io/github/last-commit/imayagmb/conta_bancaria_ts_2026?style=flat-square" />
   <img src="https://img.shields.io/github/issues/imayagmb/conta_bancaria_ts_2026?style=flat-square" />
   <img src="https://img.shields.io/github/issues-pr/imayagmb/conta_bancaria_ts_2026?style=flat-square" />
-  <img src="https://img.shields.io/badge/status-conclu%C3%ADdo-brightgreen" alt="Status: Concluído">
+  <img src="https://img.shields.io/badge/status-andamento-yellow" alt="Status: Andamento">
 </div>
 
 
