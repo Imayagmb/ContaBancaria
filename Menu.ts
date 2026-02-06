@@ -1,29 +1,60 @@
-import { Colors } from "./src/util/colors";
-import { Conta } from "./src/model/Conta";
+import { Colors } from "./src/util/Colors";
 import { Input } from "./src/util/input";
+import { ContaCorrente } from "./src/model/ContaCorrente";
+import { ContaPoupanca } from "./src/model/ContaPoupanca";
 
 export function main() {
   let opcao: number;
 
-  //Intanciar Objetos da Classe Conta
+  // //Intanciar Objetos da Classe Conta
 
-  const c1 = new Conta(1, 1234, "Sofia", 1, 100000.0);
+  // const c1 = new Conta(1, 1234, "Sofia", 1, 100000.0);
 
-  c1.visualizar();
+  // c1.visualizar();
 
-  //Testes do Método Sacar
-  console.log("Sacar 100,00:", c1.sacar(100.0));
-  console.log("Sacar 200000,00:", c1.sacar(200000.0));
-  console.log("Sacar 0,00:", c1.sacar(0.0));
+  // //Testes do Método Sacar
+  // console.log("Sacar 100,00:", c1.sacar(100.0));
+  // console.log("Sacar 200000,00:", c1.sacar(200000.0));
+  // console.log("Sacar 0,00:", c1.sacar(0.0));
 
-  //Testes do Método Depositar
-  console.log("Depositar -10,00: ");
-  c1.depositar(-10.0);
+  // //Testes do Método Depositar
+  // console.log("Depositar -10,00: ");
+  // c1.depositar(-10.0);
 
-  console.log("Depositar 500,00: ");
-  c1.depositar(500.0);
+  // console.log("Depositar 500,00: ");
+  // c1.depositar(500.0);
 
-  c1.visualizar();
+  // c1.visualizar();
+
+  // Testando a classe ContaCorrente
+  const cc1 = new ContaCorrente(2, 5678, "Luara", 1, 200000.0, 2000.0);
+
+  cc1.visualizar();
+
+  // Teste do Método sacar - conta corrente
+  console.log("Sacar R$1000.00", cc1.sacar(1000.00));
+  console.log("Sacar R$200000.00", cc1.sacar(200000.00));
+  console.log("Sacar R$2.00", cc1.sacar(2.00));
+
+  // Teste depositar
+  console.log("Depositar R$500.00")
+  cc1.depositar(500.00);
+
+  cc1.visualizar();
+
+  //TESTANDO A CLASSE ContaPoupanca
+  const cp1 = new ContaPoupanca(2, 7890, "Liara", 2, 3000000.0, 12);
+  cp1.visualizar();
+
+  //Sacar
+  console.log("Sacar R$1000000.00", cp1.sacar(1000000.00));
+  console.log("Sacar R$3000000.00", cp1.sacar(3000000.00));
+  console.log("Sacar R$50000.00", cp1.sacar(50000.00));
+
+  //Testando deposito
+  console.log("Sacar R$90000.00", cp1.sacar(90000.00));
+
+  cp1.visualizar();
 
   while (true) {
     console.log(
@@ -153,8 +184,6 @@ function sobre(): void {
       ${Colors.reset}
       `);
 }
-
-//alt + shift + F - formatar texto
 
 // Função de pausa entre as opções do menu
 function keyPress(): void {
