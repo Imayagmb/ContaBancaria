@@ -1,52 +1,47 @@
-import { Conta } from './Conta';
-import { Colors } from '../util/Colors';
+import { Conta } from "./Conta";
+import { Colors } from "../util/Colors";
+import { formatarMoeda } from "../util/Currency";
 
 export class ContaCorrente extends Conta {
+  // Atributos especificos de Conta Corrente
+  private _limite: number;
 
-    // Atributos especificos de Conta Corrente
-    private _limite: number;
+  constructor(
+    numero: number,
+    agencia: number,
+    titular: string,
+    tipo: number,
+    saldo: number,
+    limite: number,
+  ) {
+    // Super chama a super classe, nesse caso Conta
+    super(numero, agencia, titular, tipo, saldo);
+    this._limite = limite;
+  }
 
+  // Métodos GET e SET especificos da Classe ContaCorrente
+  public get limite(): number {
+    return this._limite;
+  }
 
-    constructor(
-        numero: number,
-        agencia: number, 
-        titular: string,
-        tipo: number, 
-        saldo: number, 
-        limite: number) {
+  public set limite(value: number) {
+    this._limite = value;
+  }
 
-        // Super chama a super classe, nesse caso Conta
-        super(numero, agencia, titular, tipo, saldo);
-        this._limite = limite;
-
-
+  // Método sacar sobrescrito
+  public sacar(valor: number): boolean {
+    if (valor > this.saldo + this._limite || valor <= 0) {
+      console.log(Colors.fg.red, "Saldo Insuficiente!", Colors.reset);
+      return false;
     }
 
-    // Métodos GET e SET especificos da Classe ContaCorrente
-    public get limite(): number {
-        return this._limite;
-    }
+    this.saldo -= valor;
+    return true;
+  }
 
-    public set limite(value: number) {
-        this._limite = value;
-    }
-
-    // Método sacar sobrescrito
-    public sacar(valor: number): boolean {
-
-            if ((valor > (this.saldo + this._limite)) || (valor <= 0)) {
-                console.log(Colors.fg.red,'Saldo Insuficiente!', Colors.reset);
-                return false;
-            }
-
-            this.saldo -= valor;
-            return true;
-        }
-
-    // Método visualizar sobrescrito (Polimorfismo)
-    public visualizar(): void {
-        super.visualizar();
-        console.log(`Limite da Conta: R$${this.limite.toFixed(2)}`);
-    }
-
+  // Método visualizar sobrescrito (Polimorfismo)
+  public visualizar(): void {
+    super.visualizar();
+    console.log(`Limite da conta: R$ ${formatarMoeda(this._limite)}`);
+  }
 }
