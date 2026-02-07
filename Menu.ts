@@ -170,7 +170,7 @@ function criarConta() {
       const aniversario = Input.questionInt("");
       contas.cadastrar(
         new ContaPoupanca(
-          Conta.gerarNumero(),
+          contas.gerarNumero(),
           agencia,
           titular,
           tipo,
@@ -256,7 +256,7 @@ function atualizarConta(): void {
             ? limite
             : parseFloat(entrada.replace(",", "."));
 
-        conta.atualizar(
+        contas.atualizar(
           new ContaCorrente(numero, agencia, titular, tipo, saldo, limite),
         );
 
