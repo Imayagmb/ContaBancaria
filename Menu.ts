@@ -448,7 +448,7 @@ function criarContasTeste(): void {
       2102,
       "Mylla Moura",
       1,
-      9000000.0,
+      900.0,
       900000.0,
     ),
   );
@@ -458,8 +458,8 @@ function criarContasTeste(): void {
       2202,
       "Marcelo Benson",
       1,
-      5000.0,
       500.0,
+      5000.0,
     ),
   );
 
