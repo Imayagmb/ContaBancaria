@@ -118,13 +118,17 @@ export function main() {
         keyPress();
         break;
 
-        case 9: 
-                console.log(Colors.fg.magenta, '\n\nBuscar Por Titular\n\n', Colors.reset)
+      case 9:
+        console.log(
+          Colors.fg.magenta,
+          "\n\nBuscar Por Titular\n\n",
+          Colors.reset,
+        );
 
-                procurarPorTitular();
+        procurarPorTitular();
 
-                keyPress;
-            break;
+        keyPress;
+        break;
 
       default:
         console.log(
@@ -300,105 +304,113 @@ function atualizarConta(): void {
 
 //5 - DELETAR CONTA PELO N°
 
-function deletarContaPorNumero(): void{
+function deletarContaPorNumero(): void {
+  // Solicita o número da conta
+  console.log("Digite o número da conta: ");
+  const numero = Input.questionInt("");
 
-    // Solicita o número da conta
-    console.log("Digite o número da conta: ");
-    const numero = Input.questionInt("");
-    
-    // Verifica se a conta existe
-    const conta = contas.buscarNoArray(numero);
+  // Verifica se a conta existe
+  const conta = contas.buscarNoArray(numero);
 
-    // Se a conta existir...
-    if(conta !== null){
-        
-        // Exibe a mensagem de confirmação da exclusão (Yes ou No)
-        console.log(Colors.fg.whitestrong, 
-            `\nTem certeza que deseja deletar a conta número ${numero} [y/n]?`, Colors.reset);
-        const confirma = Input.keyInYN("");
+  // Se a conta existir...
+  if (conta !== null) {
+    // Exibe a mensagem de confirmação da exclusão (Yes ou No)
+    console.log(
+      Colors.fg.whitestrong,
+      `\nTem certeza que deseja deletar a conta número ${numero} [y/n]?`,
+      Colors.reset,
+    );
+    const confirma = Input.keyInYN("");
 
-        // Se cofirmar (y), deleta a conta
-        if (confirma)
-            contas.deletar(numero);
-        else
-            console.log(Colors.fg.red,"\nOperação cancelada!", Colors.reset);
-    
-
-    }else{
-        console.log(Colors.fg.red, `A conta número ${numero} não foi encontrada!`, Colors.reset);
-    }
-
+    // Se cofirmar (y), deleta a conta
+    if (confirma) contas.deletar(numero);
+    else console.log(Colors.fg.red, "\nOperação cancelada!", Colors.reset);
+  } else {
+    console.log(
+      Colors.fg.red,
+      `A conta número ${numero} não foi encontrada!`,
+      Colors.reset,
+    );
+  }
 }
 
-function sacar(): void{
+function sacar(): void {
+  console.log("Digite o número da conta: ");
+  const numero = Input.questionInt("");
 
-    console.log("Digite o número da conta: ");
-    const numero = Input.questionInt("");
-    
-    const conta = contas.buscarNoArray(numero);
+  const conta = contas.buscarNoArray(numero);
 
-    if(conta !== null){
-        console.log("Digite o valor do saque: ");
-        const valor = Input.questionFloat("");
+  if (conta !== null) {
+    console.log("Digite o valor do saque: ");
+    const valor = Input.questionFloat("");
 
-        contas.sacar(numero, valor);
-    }else{
-        console.log(Colors.fg.red, `A conta número ${numero} não foi encontrada!`, Colors.reset);
-    }
+    contas.sacar(numero, valor);
+  } else {
+    console.log(
+      Colors.fg.red,
+      `A conta número ${numero} não foi encontrada!`,
+      Colors.reset,
+    );
+  }
 }
 
-function depositar(): void{
+function depositar(): void {
+  console.log("Digite o número da conta: ");
+  const numero = Input.questionInt("");
 
-    console.log("Digite o número da conta: ");
-    const numero = Input.questionInt("");
-    
-    const conta = contas.buscarNoArray(numero);
+  const conta = contas.buscarNoArray(numero);
 
-    if(conta !== null){
-        console.log("Digite o valor do depósito: ");
-        const valor = Input.questionFloat("");
+  if (conta !== null) {
+    console.log("Digite o valor do depósito: ");
+    const valor = Input.questionFloat("");
 
-        contas.depositar(numero, valor);
-    }else{
-        console.log(Colors.fg.red, `A conta número ${numero} não foi encontrada!`, Colors.reset);
-    }
+    contas.depositar(numero, valor);
+  } else {
+    console.log(
+      Colors.fg.red,
+      `A conta número ${numero} não foi encontrada!`,
+      Colors.reset,
+    );
+  }
 }
 
-function transferir(): void{
+function transferir(): void {
+  console.log("Digite o número da Conta de Origem: ");
+  const numeroOrigem = Input.questionInt("");
 
-    console.log("Digite o número da Conta de Origem: ");
-    const numeroOrigem = Input.questionInt("");
-    
-    console.log("Digite o número da Conta de Destino: ");
-    const numeroDestino = Input.questionInt("");
+  console.log("Digite o número da Conta de Destino: ");
+  const numeroDestino = Input.questionInt("");
 
-    const contaOrigem = contas.buscarNoArray(numeroOrigem);
-    const contaDestino = contas.buscarNoArray(numeroDestino);
+  const contaOrigem = contas.buscarNoArray(numeroOrigem);
+  const contaDestino = contas.buscarNoArray(numeroDestino);
 
-    if(contaOrigem === null){
+  if (contaOrigem === null) {
+    console.log(
+      Colors.fg.red,
+      `A Conta de Origem número ${numeroOrigem} não foi encontrada!`,
+      Colors.reset,
+    );
+  } else if (contaDestino === null) {
+    console.log(
+      Colors.fg.red,
+      `A Conta de Destino número ${numeroDestino} não foi encontrada!`,
+      Colors.reset,
+    );
+  } else {
+    console.log("Digite o valor da Transferência: ");
+    const valor = Input.questionFloat("");
 
-        console.log(Colors.fg.red, `A Conta de Origem número ${numeroOrigem} não foi encontrada!`, Colors.reset);
-
-    }else if(contaDestino === null)    {
-
-        console.log(Colors.fg.red, `A Conta de Destino número ${numeroDestino} não foi encontrada!`, Colors.reset);
-
-    }else{
-        console.log("Digite o valor da Transferência: ");
-        const valor = Input.questionFloat("");
-
-        contas.transferir(numeroOrigem, numeroDestino, valor);
-    }
+    contas.transferir(numeroOrigem, numeroDestino, valor);
+  }
 }
 
-function procurarPorTitular(): void{
+function procurarPorTitular(): void {
+  // Solicita o nome do titular
+  console.log("Digite o Nome do Titular: ");
+  const titular = Input.question("");
 
-    // Solicita o nome do titular
-    console.log("Digite o Nome do Titular: ");
-    const titular = Input.question("");
-
-    // Localiza a conta a partir do nome do titular
-    contas.procurarPorTitular(titular);
+  // Localiza a conta a partir do nome do titular
+  contas.procurarPorTitular(titular);
 }
 
 //FUNÇÃO COM DADOS DO DEV
