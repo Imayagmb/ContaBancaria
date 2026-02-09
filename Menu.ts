@@ -3,7 +3,6 @@ import { ContaCorrente } from "./src/model/ContaCorrente";
 import { ContaPoupanca } from "./src/model/ContaPoupanca";
 import { Colors } from "./src/util/Colors";
 import { Input } from "./src/util/input";
-import { Conta } from "./src/model/Conta";
 
 const contas = new ContaController();
 const tipoContas = ["Conta Corrente", "Conta Poupança"];
@@ -18,16 +17,16 @@ export function main() {
       Colors.bg.red +
         Colors.fg.black +
         `
-    ╔═══════════════════════════════════════╗
-    ║        BANCO DO BRAZIL COM Z          ║
-    ║      Seu futuro começa aqui           ║
-    ╠═══════════════════════════════════════╣
-    ║ 1 - Criar Conta        6 - Sacar      ║
-    ║ 2 - Listar Contas      7 - Depositar  ║
-    ║ 3 - Buscar por Número  8 - Transferir ║
-    ║ 4 - Atualizar Dados    9 - Sair       ║
-    ║ 5 - Apagar Conta                      ║
-    ╚═══════════════════════════════════════╝
+    ╔═════════════════════════════════════════════════════════════════╗
+    ║                      BANCO DO BRAZIL COM Z                      ║
+    ║                     Seu futuro começa aqui                      ║
+    ╠═════════════════════════════════════════════════════════════════╣
+    ║ 1 - Criar Conta            6 - Sacar                            ║
+    ║ 2 - Listar Contas          7 - Depositar                        ║
+    ║ 3 - Buscar por Número      8 - Transferir                       ║
+    ║ 4 - Atualizar Dados        9 - Procurar conta por Titular       ║
+    ║ 5 - Apagar Conta           0 - Sair                             ║
+    ╚═════════════════════════════════════════════════════════════════╝
     ` +
         Colors.reset,
     );
@@ -35,7 +34,7 @@ export function main() {
 
     opcao = Input.questionInt(" ");
 
-    if (opcao === 9) {
+    if (opcao === 0) {
       console.log(
         Colors.fg.greenstrong,
         "\nBanco do Brazil com Z - O seu Futuro começa aqui!",
@@ -118,6 +117,14 @@ export function main() {
 
         keyPress();
         break;
+
+        case 9: 
+                console.log(Colors.fg.magenta, '\n\nBuscar Por Titular\n\n', Colors.reset)
+
+                procurarPorTitular();
+
+                keyPress;
+            break;
 
       default:
         console.log(
@@ -293,11 +300,105 @@ function atualizarConta(): void {
 
 //5 - DELETAR CONTA PELO N°
 
-function deletarContaPorNumero(): void {
-  console.log("Digite o N° da conta: ");
-  const numero = Input.questionInt("");
+function deletarContaPorNumero(): void{
 
-  contas.deletar(numero);
+    // Solicita o número da conta
+    console.log("Digite o número da conta: ");
+    const numero = Input.questionInt("");
+    
+    // Verifica se a conta existe
+    const conta = contas.buscarNoArray(numero);
+
+    // Se a conta existir...
+    if(conta !== null){
+        
+        // Exibe a mensagem de confirmação da exclusão (Yes ou No)
+        console.log(Colors.fg.whitestrong, 
+            `\nTem certeza que deseja deletar a conta número ${numero} [y/n]?`, Colors.reset);
+        const confirma = Input.keyInYN("");
+
+        // Se cofirmar (y), deleta a conta
+        if (confirma)
+            contas.deletar(numero);
+        else
+            console.log(Colors.fg.red,"\nOperação cancelada!", Colors.reset);
+    
+
+    }else{
+        console.log(Colors.fg.red, `A conta número ${numero} não foi encontrada!`, Colors.reset);
+    }
+
+}
+
+function sacar(): void{
+
+    console.log("Digite o número da conta: ");
+    const numero = Input.questionInt("");
+    
+    const conta = contas.buscarNoArray(numero);
+
+    if(conta !== null){
+        console.log("Digite o valor do saque: ");
+        const valor = Input.questionFloat("");
+
+        contas.sacar(numero, valor);
+    }else{
+        console.log(Colors.fg.red, `A conta número ${numero} não foi encontrada!`, Colors.reset);
+    }
+}
+
+function depositar(): void{
+
+    console.log("Digite o número da conta: ");
+    const numero = Input.questionInt("");
+    
+    const conta = contas.buscarNoArray(numero);
+
+    if(conta !== null){
+        console.log("Digite o valor do depósito: ");
+        const valor = Input.questionFloat("");
+
+        contas.depositar(numero, valor);
+    }else{
+        console.log(Colors.fg.red, `A conta número ${numero} não foi encontrada!`, Colors.reset);
+    }
+}
+
+function transferir(): void{
+
+    console.log("Digite o número da Conta de Origem: ");
+    const numeroOrigem = Input.questionInt("");
+    
+    console.log("Digite o número da Conta de Destino: ");
+    const numeroDestino = Input.questionInt("");
+
+    const contaOrigem = contas.buscarNoArray(numeroOrigem);
+    const contaDestino = contas.buscarNoArray(numeroDestino);
+
+    if(contaOrigem === null){
+
+        console.log(Colors.fg.red, `A Conta de Origem número ${numeroOrigem} não foi encontrada!`, Colors.reset);
+
+    }else if(contaDestino === null)    {
+
+        console.log(Colors.fg.red, `A Conta de Destino número ${numeroDestino} não foi encontrada!`, Colors.reset);
+
+    }else{
+        console.log("Digite o valor da Transferência: ");
+        const valor = Input.questionFloat("");
+
+        contas.transferir(numeroOrigem, numeroDestino, valor);
+    }
+}
+
+function procurarPorTitular(): void{
+
+    // Solicita o nome do titular
+    console.log("Digite o Nome do Titular: ");
+    const titular = Input.question("");
+
+    // Localiza a conta a partir do nome do titular
+    contas.procurarPorTitular(titular);
 }
 
 //FUNÇÃO COM DADOS DO DEV

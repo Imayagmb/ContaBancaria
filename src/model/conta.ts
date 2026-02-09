@@ -65,41 +65,43 @@ export abstract class Conta {
 
   // Metodos Auxiliares
   public sacar(valor: number): boolean {
-    if (valor > this.saldo || valor <= 0) {
-      console.log(Colors.fg.red, "Operação Inválida!", Colors.reset);
-      return false;
+
+        if(valor <= 0){
+            console.log(Colors.fg.red, "\nO valor deve ser positivo", Colors.reset);
+            return false;
+        }
+
+        if(valor > this._saldo){
+            console.log(Colors.fg.red, "\nSaldo Insuficiente!", Colors.reset);
+            return false;
+        }
+
+        this._saldo -= valor;
+        return true;
     }
 
-    this.saldo -= valor;
-    return true;
-  }
+    public depositar(valor: number): void {
 
-  public depositar(valor: number): void {
-    if (valor <= 0)
-      console.log(
-        Colors.fg.red,
-        "Não possui valor para Depositar!",
-        Colors.reset,
-      );
-    else this.saldo += valor;
-  }
-
-  public visualizar(): void {
-    let tipo: string;
-
-    switch (this._tipo) {
-      case 1:
-        tipo = "Conta Corrente";
-        break;
-
-      case 2:
-        tipo = "Conta Poupança";
-        break;
-
-      default:
-        tipo = "Tipo inválido";
+        if(valor <= 0)
+            console.log(Colors.fg.red, "O valor deve ser positivo", Colors.reset);
+        else
+            this._saldo += valor;
     }
 
+    public visualizar(): void {
+
+        let tipo: string;
+
+        switch(this._tipo){
+            case 1:
+                tipo = "Conta Corrente";
+            break;
+            case 2:
+                tipo = "Conta Poupança";
+            break;
+            default:
+                tipo = "Tipo Inválido";
+        }
     console.log("\n════════════════════════════════════════════════════════");
     console.log("                      DADOS DA CONTA                      ");
     console.log("══════════════════════════════════════════════════════════");
@@ -107,6 +109,6 @@ export abstract class Conta {
     console.log(`Número da Agência: ${this.agencia}`);
     console.log(`Nome do titular: ${this.titular}`);
     console.log(`Tipo da conta: ${tipo}`);
-    console.log(`Saldo da conta: R$${formatarMoeda(this._saldo)}`);
+    console.log(`Saldo da conta: ${formatarMoeda(this._saldo)}`);
   }
 }

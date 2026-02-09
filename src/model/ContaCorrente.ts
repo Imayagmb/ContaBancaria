@@ -29,19 +29,31 @@ export class ContaCorrente extends Conta {
   }
 
   // Método sacar sobrescrito
-  public sacar(valor: number): boolean {
-    if (valor > this.saldo + this._limite || valor <= 0) {
-      console.log(Colors.fg.red, "Saldo Insuficiente!", Colors.reset);
-      return false;
-    }
+public sacar(valor: number): boolean {
+		if (valor <= 0) {
+			console.log(
+				Colors.fg.red,
+				'\nO valor deve ser positivo',
+				Colors.reset,
+			)
+			return false
+		}
 
-    this.saldo -= valor;
-    return true;
-  }
+		if (valor > (this.saldo + this._limite)) {
+			console.log(
+				Colors.fg.red,
+				'\nSaldo Insuficiente!',
+				Colors.reset,
+			)
+			return false
+		}
 
+		this.saldo -= valor
+		return true
+	}
   // Método visualizar sobrescrito (Polimorfismo)
   public visualizar(): void {
     super.visualizar();
-    console.log(`Limite da conta: R$ ${formatarMoeda(this._limite)}`);
+    console.log(`Limite da conta: ${formatarMoeda(this._limite)}`);
   }
 }

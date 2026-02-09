@@ -26,6 +26,20 @@ export class ContaController implements ContaRepository {
     }
   }
 
+  procurarPorTitular(titular: string): void {
+    //filtragem dos dados
+    const buscaPorTitular = this.listaContas.filter( conta =>
+      conta.titular.toUpperCase().includes(titular.toUpperCase())
+    );
+
+    //Listagem dos dados filtrados
+    if (buscaPorTitular.length > 0) {
+      buscaPorTitular.forEach( conta => conta.visualizar());
+    }else{
+      console.log(Colors.fg.red, `\nNenhuma conta foi encontrada"`, Colors.reset);
+    }
+  }
+
   cadastrar(conta: Conta): void {
     this.listaContas.push(conta);
     console.log(
